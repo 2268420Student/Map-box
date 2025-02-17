@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Final Project current new map not integrated</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8' />
+  <title>Toggle layers</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <!-- Mapbox JS API !-->
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js'></script>
+  <!-- Mapbox CSS!-->
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css' rel='stylesheet' />
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=PT+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id='map'></div>
+  <div id='console'>
+    <h1>Distribution of Neolithic Monuments Across Scotland</h1>
+    <p>Data: <a href='https://canmore.org.uk/'>Crime Data </a> in City of London, 2023</p>
+
+    <!–– Radio buttons go below––>
+      <div class='session'>
+        <h2 id="monument-toggle"><strong>Monument Type ▼</strong></h2> <!-- Clickable Header -->
+        <div id='filters' class="collapsible-content">
+          <!-- Collapsible Section -->
+          <input id='Causewayed Enclosure' type='checkbox' name='toggle' value='Causewayed Enclosure' checked>
+          <label for='Causewayed Enclosure'>Causewayed Enclosure</label>
+
+          <input id='Chambered Cairn' type='checkbox' name='toggle' value='Chambered Cairn' checked>
+          <label for='Chambered Cairn'>Chambered Cairn</label>
+
+          <input id='Cursus' type='checkbox' name='toggle' value='Cursus' checked>
+          <label for='Cursus'>Cursus</label>
+
+          <input id='Henge' type='checkbox' name='toggle' value='Henge' checked>
+          <label for='Henge'>Henge</label>
+
+          <input id='Long Barrow' type='checkbox' name='toggle' value='Long Barrow' checked>
+          <label for='Long Barrow'>Long Barrow</label>
+
+          <input id='Palisaded Enclosure' type='checkbox' name='toggle' value='Palisaded Enclosure' checked>
+          <label for='Palisaded Enclosure'>Palisaded Enclosure</label>
+
+          <input id='Stone Circle' type='checkbox' name='toggle' value='Stone Circle' checked>
+          <label for='Stone Circle'>Stone Circle</label>
+        </div>
+      </div>
+
+      <div id="map-style-toggle">
+        <label for="styleToggle"><strong>Map Style:</strong></label>
+        <select id="styleToggle">
+          <option value="satellite">Satellite Imagery</option>
+          <option value="light">Stylized Map</option>
+        </select>
+      </div>
+
+      <!-- 🔹 New: Heatmap Toggle Header -->
+      <h2 id="heatmap-toggle-header"><strong>Heatmaps ▶</strong></h2>
+      <div id="heatmap-options" style="display: none;">
+        <!-- Heatmap radio buttons -->
+        <input type="radio" name="heatmap" value="none" checked> None<br>
+        <input type="radio" name="heatmap" value="Causewayed Enclosure"> Causewayed Enclosure<br>
+        <input type="radio" name="heatmap" value="Chambered Cairn"> Chambered Cairn<br>
+        <input type="radio" name="heatmap" value="Cursus"> Cursus<br>
+        <input type="radio" name="heatmap" value="Henge"> Henge<br>
+        <input type="radio" name="heatmap" value="Long Barrow"> Long Barrow<br>
+        <input type="radio" name="heatmap" value="Palisaded Enclosure"> Palisaded Enclosure<br>
+        <input type="radio" name="heatmap" value="Stone Circle"> Stone Circle<br>
+      </div>
+
+  </div>
+
+  <div id="legend" class="legend"></div>
+</body>
+
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
