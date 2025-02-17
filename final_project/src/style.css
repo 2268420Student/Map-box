@@ -1,0 +1,570 @@
+/* Ensure the body takes up full screen */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row; /* Ensures side-by-side layout */
+  width: 100vw;
+  overflow: hidden;
+}
+
+#console {
+  width: 25%;
+  max-width: 350px;
+  min-width: 250px;
+  height: 100vh;
+  background: #f4e1c1; /* Base parchment color */
+  background-image: url("https://www.transparenttextures.com/patterns/aged-paper.png"); /* Subtle paper texture */
+  border: 4px solid #c4a484; /* Warm earthy brown border */
+  border-radius: 6px;
+  padding: 10px; /* Reduced padding */
+  font-family: "PT Mono", "Courier New", monospace;
+  color: #4a3b2d;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+  max-height: 100vh;
+  overflow-y: auto;
+  flex-shrink: 0; /* Prevents resizing */
+  order: -1; /* Keeps sidebar on the left */
+}
+
+/* Notebook Binding Effect */
+#console::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    #c4a484,
+    #c4a484 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  border-right: 2px dashed #8b6a4f; /* Notebook binding */
+  z-index: 1;
+}
+
+/* Map section */
+#map {
+  flex-grow: 1;
+  height: 100vh;
+  width: 75%;
+}
+
+/* Compact Headings */
+#console h1,
+#console h2,
+#console h3,
+#console label {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 16px; /* Reduced size */
+  color: #3d2b1f;
+  text-transform: uppercase;
+  letter-spacing: 0.5px; /* Slightly tighter spacing */
+  border-bottom: 1px dashed #8b6a4f; /* Thinner separator */
+  padding-bottom: 3px;
+  margin-bottom: 8px; /* Less spacing */
+}
+
+/* Adjust Heading Sizes */
+#console h1 {
+  font-size: 18px;
+}
+#console h2 {
+  font-size: 16px;
+}
+#console h3 {
+  font-size: 14px;
+}
+
+/* Compact Search Bar */
+#siteSearch {
+  width: 100%;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Compact Geocoder */
+.mapboxgl-ctrl-geocoder {
+  width: 100% !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  padding: 6px !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+  height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--input {
+  height: 30px !important;
+  line-height: 30px !important;
+  padding: 6px !important;
+  font-size: 14px !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Legend - Clay Plaque Look */
+.legend {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #e3d5b8;
+  border: 2px solid #b19575;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-family: "PT Mono", "Courier New", monospace;
+  color: #3d2b1f;
+  max-width: 180px;
+  z-index: 999;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Compact Checkbox Section */
+#filters {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 3px;
+}
+
+/* Align Checkboxes to the Right */
+#filters label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 12px; /* Smaller font */
+  color: #3d2b1f;
+  padding: 2px 0;
+  border-bottom: 1px dashed #8b6a4f;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Style the Checkbox */
+#filters input[type="checkbox"] {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid #8b6a4f;
+  background: #f4e1c1;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/* Checked State */
+#filters input[type="checkbox"]:checked {
+  background-color: #8b6a4f;
+  border-color: #6b4c35;
+}
+
+/* Add a Checkmark Effect */
+#filters input[type="checkbox"]::after {
+  content: "✔";
+  font-size: 10px;
+  color: white;
+  position: relative;
+  display: none;
+  left: 2px;
+  top: -1px;
+}
+
+#filters input[type="checkbox"]:checked::after {
+  display: block;
+}
+
+/* Remove Last Separator */
+#filters label:last-child {
+  border-bottom: none;
+}
+
+/* Scrollbar Styling */
+#console::-webkit-scrollbar {
+  width: 6px;
+}
+
+#console::-webkit-scrollbar-track {
+  background: #e3d5b8;
+}
+
+#console::-webkit-scrollbar-thumb {
+  background: #8b6a4f;
+  border-radius: 8px;
+}
+
+/* 🔹 Style Map Style Switcher */
+#map-style-toggle {
+  margin-bottom: 10px;
+}
+
+#map-style-toggle label {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 14px;
+  color: #3d2b1f;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px dashed #8b6a4f;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* 🔹 Style the Dropdown */
+#styleToggle {
+  width: 100%;
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #8b6a4f;
+  background: #f4e1c1;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 14px;
+  color: #3d2b1f;
+  cursor: pointer;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Heatmap Toggle Styling */
+#heatmap-toggle {
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px dashed #8b6a4f;
+}
+
+#heatmap-toggle label {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 14px;
+  color: #3d2b1f;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: 5px;
+  display: block;
+}
+
+#heatmap-toggle input {
+  margin-right: 8px;
+}
+
+#heatmap-toggle div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.collapsible-content {
+  display: block;
+  overflow: hidden;
+  transition: max-height 1s ease-out;
+}
+
+.my-popup .mapboxgl-popup-content {
+  width: 200px;
+
+  background: rgba(83, 92, 104, 0.9);
+
+  border-top: 50px black;
+
+  padding: 20px;
+
+  color: white;
+}
+
+/* 🔹 Archaeology-Themed Pop-Up */
+.mapboxgl-popup {
+  max-width: 250px; /* Keeps popups compact */
+  font-family: "PT Mono", "Courier New", monospace;
+}
+
+.mapboxgl-popup-content {
+  background: #f4e1c1; /* Parchment color */
+  background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png'); /* Paper texture */
+  border: 3px solid #8b6a4f; /* Dark brown border */
+  border-radius: 10px; /* Soft rounded corners */
+  padding: 10px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3); /* Adds depth */
+  color: #3d2b1f; /* Dark brown text */
+}
+
+/* 🔹 Pop-Up Header */
+.mapboxgl-popup-content h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #4a3b2d; /* Slightly darker brown */
+  border-bottom: 2px dashed #8b6a4f; /* Dashed underline */
+  padding-bottom: 3px;
+}
+
+/* 🔹 Pop-Up Text */
+.mapboxgl-popup-content p {
+  font-size: 13px;
+  margin: 5px 0;
+}
+
+/* 🔹 Pop-Up Links */
+.mapboxgl-popup-content a {
+  color: #6b4c35;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px solid #6b4c35;
+  transition: color 0.3s ease;
+}
+
+.mapboxgl-popup-content a:hover {
+  color: #9a6e4f; /* Lighter brown on hover */
+  border-bottom: 1px solid #9a6e4f;
+}
+
+/* 🔹 Pop-Up Image Styling */
+.mapboxgl-popup-content img {
+  max-width: 100%;
+  border-radius: 5px;
+  border: 2px solid #8b6a4f; /* Brown border around images */
+  margin-top: 8px;
+}
+🔹 JavaScript: Apply the Themed Popups
+This will keep your existing functionality but apply the new styled pop-ups.
+
+✅ Updated Click Event for Popups
+javascript
+Copy
+Edit
+map.on("click", async (event) => {
+  const features = map.queryRenderedFeatures(event.point, {
+    layers: ["monuments-layer"]
+  });
+
+  if (!features.length) return;
+
+  const feature = features[0];
+  const siteName = feature.properties.SITE_NAME || "Unknown Site";
+  const siteType = feature.properties.SITE_TYPE || "Unknown Type";
+  const siteURL = feature.properties.URL || "#";
+
+  let imageHTML = "";
+  
+  // Optional: If images are pre-fetched in dataset
+  if (feature.properties.IMAGE_URL) {
+    imageHTML = `<img src="${feature.properties.IMAGE_URL}" alt="${siteName}" style="width: 100%; max-height: 120px; object-fit: cover; margin-top: 8px;">`;
+  }
+
+  // Create styled popup
+  const popup = new mapboxgl.Popup({ offset: [0, -15], className: "my-popup" })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML(
+      `<h3>${siteName}</h3>
+      <p><strong>Type:</strong> ${siteType}</p>
+      ${imageHTML}
+      <p><a href="${siteURL}" target="_blank">More Info</a></p>`
+    )
+    .addTo(map);
+});
+
+/* 🔹 Ensure the pop-up is fully opaque */
+.mapboxgl-popup-content {
+  background: #f4e1c1 !important; /* Solid parchment color */
+  background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png'); /* Aged paper texture */
+  background-blend-mode: normal !important; /* Ensures full color display */
+  border: 3px solid #8b6a4f; /* Dark brown border */
+  border-radius: 10px; /* Soft rounded edges */
+  padding: 10px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3); /* Adds depth */
+  color: #3d2b1f; /* Dark brown text */
+}
+
+/* 🔹 Explicitly set background transparency to NONE */
+.mapboxgl-popup-content,
+.mapboxgl-popup-content div {
+  background: none !important;
+  background-color: #f4e1c1 !important;
+}
+
+/* 🔹 Fix pop-up arrow (pointer) to match the parchment background */
+.mapboxgl-popup-tip {
+  border-top-color: #f4e1c1 !important; /* Matches the popup background */
+}
+
+/* 🔹 Buttons Below Legend */
+.popup-buttons {
+  position: absolute;
+  top: calc(10px + 260px); /* Positions below the legend */
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.popup-button {
+  width: 195px; /* Matches legend width */
+  padding: 8px;
+  background: #8b6a4f; /* Warm brown button */
+  color: #fff;
+  border: 2px solid #6b4c35;
+  border-radius: 6px;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease-in-out;
+  text-align: center;
+}
+
+.popup-button:hover {
+  background: #9a6e4f;
+  transform: scale(1.05);
+}
+
+/* 🔹 Full-Screen Popups */
+.modal {
+  display: none; /* ✅ Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw !important; /* ✅ Full width */
+  height: 100vh !important; /* ✅ Full height */
+  background: rgba(0, 0, 0, 0.6); /* ✅ Dark transparent background */
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ✅ Fix width of modal popups */
+.modal-content {
+  background: #f4e1c1; /* ✅ Matches sidebar */
+  background-image: url("https://www.transparenttextures.com/patterns/aged-paper.png");
+  width: 70vw !important; /* ✅ Increase width to 70% of viewport */
+  max-width: 900px !important; /* ✅ Prevent it from getting too wide */
+  min-height: 350px !important; /* ✅ Increase height */
+  padding: 20px !important;
+  border: 3px solid #8b6a4f;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  text-align: left; /* ✅ Align text for better readability */
+  font-family: "PT Mono", "Courier New", monospace;
+  color: #3d2b1f;
+  overflow-y: auto; /* ✅ Enables scrolling if content is too long */
+}
+
+/* ✅ Fix the Close Button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px !important;
+  font-weight: bold;
+  color: #6b4c35;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-button:hover {
+  color: #9a6e4f;
+}
+
+.mapboxgl-popup {
+  max-width:300px !important; /* Increases width */
+}
+
+.mapboxgl-popup-content {
+  width: 300px !important; /* Ensures consistent width */
+  max-width: 300px !important;
+  padding: 15px !important; /* More padding for readability */
+}
+
+/* General popup styling */
+.popup-overlay {
+  width: 80vw !important; /* 80% of the viewport width */
+  max-width: 900px !important; /* Ensures it doesn't get too wide */
+  min-height: 300px !important; /* Increases height */
+  padding: 20px !important;
+  background: #f4e1c1; /* Parchment theme */
+  border: 4px solid #8b6a4f;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  font-family: "PT Mono", "Courier New", monospace;
+  color: #3d2b1f;
+  overflow-y: auto; /* Enables scrolling if content is too long */
+}
+
+/* Adjust text for better readability */
+.popup-content {
+  font-size: 16px !important;
+  line-height: 1.5;
+}
+
+/* Close button positioning */
+.popup-overlay .popup-close {
+  font-size: 20px !important;
+  top: 10px !important;
+  right: 15px !important;
+  color: #6b4c35;
+}
+
+/* General popup styling */
+.popup-overlay {
+  display: flex !important; /* ✅ Ensures it appears */
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw !important; /* ✅ Full width */
+  height: 100vh !important; /* ✅ Full height */
+  background: rgba(0, 0, 0, 0.6); /* Dark transparent background */
+  z-index: 2000;
+}
+
+/* Inner Content Styling */
+.popup-content {
+  width: 80vw !important; /* ✅ Expands to 80% of viewport width */
+  max-width: 900px !important; /* ✅ Prevents it from getting too wide */
+  min-height: 300px !important; /* ✅ Increases height */
+  padding: 20px !important;
+  background: #f4e1c1; /* Parchment theme */
+  background-image: url("https://www.transparenttextures.com/patterns/aged-paper.png");
+  border: 4px solid #8b6a4f;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  font-family: "PT Mono", "Courier New", monospace;
+  color: #3d2b1f;
+  overflow-y: auto; /* Enables scrolling if content is too long */
+}
+
+/* Close button */
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px !important;
+  font-weight: bold;
+  color: #6b4c35;
+  cursor: pointer;
+}
+
+.popup-close:hover {
+  color: #9a6e4f;
+}
